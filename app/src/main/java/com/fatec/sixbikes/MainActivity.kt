@@ -16,6 +16,8 @@ import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var webView: WebView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val webView = findViewById<WebView>(R.id.webview)
+        webView = findViewById(R.id.webview)
 
         webView.settings.javaScriptEnabled = true
         webView.settings.domStorageEnabled = true
@@ -72,7 +74,21 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        webView.loadUrl("http://10.0.2.2:3000/index.html")
+        // Restaura a URL salva ou carrega a inicial
+        val prefs = getSharedPreferences("sixbikes", Context.MODE_PRIVATE)
+        val savedUrl = prefs.getString("lastUrl", null)
+        if (!savedUrl.isNullOrEmpty()) {
+            webView.loadUrl(savedUrl)
+        } else {
+            webView.loadUrl("https://sixbikes-frontend-820543870007.southamerica-east1.run.app/")
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // Salva a URL quando o app vai para segundo plano
+        val prefs = getSharedPreferences("sixbikes", Context.MODE_PRIVATE)
+        prefs.edit().putString("lastUrl", webView.url).apply()
     }
 
     inner class AndroidBridge(private val webView: WebView) {
