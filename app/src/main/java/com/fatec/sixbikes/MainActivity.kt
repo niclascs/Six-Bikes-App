@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+<<<<<<< HEAD
         // Restaura a URL salva ou carrega a inicial
         val prefs = getSharedPreferences("sixbikes", Context.MODE_PRIVATE)
         val savedUrl = prefs.getString("lastUrl", null)
@@ -89,6 +90,9 @@ class MainActivity : AppCompatActivity() {
         // Salva a URL quando o app vai para segundo plano
         val prefs = getSharedPreferences("sixbikes", Context.MODE_PRIVATE)
         prefs.edit().putString("lastUrl", webView.url).apply()
+=======
+        webView.loadUrl("https://sixbikes-frontend-820543870007.southamerica-east1.run.app/")
+>>>>>>> b049e92b24126ad1c972fc42f5f56ee1d1aeb168
     }
 
     inner class AndroidBridge(private val webView: WebView) {
