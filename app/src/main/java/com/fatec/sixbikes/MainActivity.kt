@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        webView.loadUrl("http://10.0.2.2:3000/index.html")
+        webView.loadUrl("https://sixbikes-frontend-820543870007.southamerica-east1.run.app/")
     }
 
     inner class AndroidBridge(private val webView: WebView) {
